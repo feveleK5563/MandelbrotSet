@@ -5,9 +5,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="ソース ファイル\Task_Scene%28Test%29">
-      <UniqueIdentifier>{1644d8d5-b98e-4e7a-be91-545459ba8508}</UniqueIdentifier>
-    </Filter>
     <Filter Include="システム">
       <UniqueIdentifier>{b62d9bf3-85bb-40d7-8d9e-a50722211543}</UniqueIdentifier>
     </Filter>
@@ -25,6 +22,9 @@
     </Filter>
     <Filter Include="システム\Tools">
       <UniqueIdentifier>{1b1dd403-1bbf-41cb-aa54-5db5c0f85585}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Task_Scene">
+      <UniqueIdentifier>{1644d8d5-b98e-4e7a-be91-545459ba8508}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -65,7 +65,7 @@
       <Filter>システム</Filter>
     </ClCompile>
     <ClCompile Include="src\Task_Mandelbrot.cpp">
-      <Filter>ソース ファイル\Task_Scene%28Test%29</Filter>
+      <Filter>ソース ファイル\Task_Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -103,7 +103,7 @@
       <Filter>システム\Image</Filter>
     </ClInclude>
     <ClInclude Include="src\Task_Mandelbrot.h">
-      <Filter>ソース ファイル\Task_Scene%28Test%29</Filter>
+      <Filter>ソース ファイル\Task_Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -136,17 +136,28 @@ namespace Mandelbrot
 			}
 			if (Input::key[KEY_INPUT_D] == DOWN)
 			{
+				ChangeExpansionRate(1.25);
+				return;
+			}
+			if (Input::key[KEY_INPUT_F] == DOWN)
+			{
 				ChangeExpansionRate(1.0);
 				return;
 			}
-			if (Input::key[KEY_INPUT_D] == DOWN)
+
+			if (Input::key[KEY_INPUT_Z] == DOWN)
+			{
+				ChangeExpansionRate(0.1);
+				return;
+			}
+			if (Input::key[KEY_INPUT_X] == DOWN)
 			{
 				ChangeExpansionRate(0.5);
 				return;
 			}
-			if (Input::key[KEY_INPUT_D] == DOWN)
+			if (Input::key[KEY_INPUT_C] == DOWN)
 			{
-				ChangeExpansionRate(0.1);
+				ChangeExpansionRate(0.8);
 				return;
 			}
 		}
