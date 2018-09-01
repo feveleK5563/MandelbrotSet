@@ -6,8 +6,8 @@
 
 namespace SystemDefine
 {
-	constexpr int windowSizeX(1280);	//ウィンドウサイズX
-	constexpr int windowSizeY(720);		//ウィンドウサイズY
+	constexpr int windowSizeX(1920);	//ウィンドウサイズX
+	constexpr int windowSizeY(1080);	//ウィンドウサイズY
 
 	//画面外判定(引数に矩形を指定、画面外に出ていたらtrue)
 	bool WindowOutBox(const Math::Box2D& hitBase);

@@ -53,11 +53,12 @@ namespace Mandelbrot
 
 		long double scale;
 		long double posX, posY;
+		long double nowPosX, nowPosY;
+		int calculationNum;
 
 		const double posRevision;
 		const double size;
 		const double minScale;
-		const int calculationNum;
 
 		//ï`âÊêF
 		int color[SystemDefine::windowSizeY][SystemDefine::windowSizeX];

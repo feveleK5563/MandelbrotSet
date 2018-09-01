@@ -46,10 +46,12 @@ namespace Mandelbrot
 		scale(4.0),
 		posX(2.0),
 		posY(2.0),
+		nowPosX(0.0),
+		nowPosY(0.0),
 		posRevision((double)SystemDefine::windowSizeX / (double)SystemDefine::windowSizeY),
 		size(SystemDefine::windowSizeY),
 		minScale(scale),
-		calculationNum(200)
+		calculationNum(100)
 	{
 	}
 	//----------------------------------------------
@@ -79,7 +81,6 @@ namespace Mandelbrot
 	void Task::Initialize()
 	{
 		posX += posRevision;
-		ccCnt.SetEndTime(calculationNum);
 		Reset();
 	}
 
@@ -119,6 +120,14 @@ namespace Mandelbrot
 		if (Input::key[KEY_INPUT_Q] == DOWN)
 		{
 			isDrawGuide = !isDrawGuide;
+		}
+
+
+		//計算量の増減
+		int plusCNum = GetMouseWheelRotVol();
+		if (ccCnt.IsTimeEnd())
+		{
+			calculationNum = max(calculationNum + (plusCNum * 10), 10);
 		}
 
 		//拡大・縮小
@@ -166,6 +175,7 @@ namespace Mandelbrot
 		{
 			if (ccCnt.IsTimeEnd())
 			{
+				calculationNum = 100;
 				scale = 4.0;
 				posX = 2.0 + posRevision;
 				posY = 2.0;
@@ -191,16 +201,25 @@ namespace Mandelbrot
 		if (!isDrawGuide)
 			return;
 
+		int setPosY = 10;
+
+		DrawFormatString(10, setPosY, GetColor(255, 255, 255),
+			"現座標：X(%f), Y(%f)", nowPosX, nowPosY);
+
+		DrawFormatString(10, setPosY += 20, GetColor(255, 255, 255),
+			"計算量：%d回", calculationNum);
+
+		setPosY += 20;
 		if (ccCnt.IsTimeEnd())
 		{
-			DrawFormatString(10, 10, GetColor(255, 255, 255), "計算終了");
+			DrawFormatString(10, setPosY, GetColor(255, 255, 255), "計算終了");
 		}
 		else
 		{
-			DrawFormatString(10, 10, GetColor(255, 255, 255), "計算中…");
+			DrawFormatString(10, setPosY, GetColor(255, 255, 255), "計算中…");
 		}
 
-		DrawFormatString(10, 10 + 30, GetColor(255, 255, 255), "拡大率 : %f", scale / minScale);
+		DrawFormatString(10, setPosY += 25, GetColor(255, 255, 255), "拡大率 : %f", scale / minScale);
 
 		if (cursor.on)
 		{
@@ -213,8 +232,8 @@ namespace Mandelbrot
 				Color(255, 255, 255, 255)
 			);
 
-			DrawFormatString(10, 10 + 50, GetColor(255, 255, 255),
-				"X(%f), Y(%f)", cursor.mposX, cursor.mposY);
+			DrawFormatString(10, setPosY += 20, GetColor(255, 255, 255),
+				"指定座標：X(%f), Y(%f)", cursor.mposX, cursor.mposY);
 		}
 	}
 
@@ -223,6 +242,7 @@ namespace Mandelbrot
 	//リセット
 	void Task::Reset()
 	{
+		ccCnt.SetEndTime(calculationNum);
 		ccCnt.ResetCntTime();
 		cursor.on = false;
 		for (int wy = 0; wy < SystemDefine::windowSizeY; ++wy)
@@ -254,8 +274,10 @@ namespace Mandelbrot
 	//拡大率を変更する
 	void Task::ChangeExpansionRate(double rate)
 	{
-		posX = -cursor.mposX + (2.0 / rate) * (scale / minScale) * posRevision;
-		posY = -cursor.mposY + (2.0 / rate) * (scale / minScale);
+		nowPosX = cursor.mposX;
+		nowPosY = cursor.mposY;
+		posX = -cursor.mposX + ((2.0 / rate) * (scale / minScale) * posRevision);
+		posY = -cursor.mposY + ((2.0 / rate) * (scale / minScale));
 		scale /= rate;
 		Reset();
 	}
