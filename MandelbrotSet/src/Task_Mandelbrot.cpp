@@ -171,6 +171,7 @@ namespace Mandelbrot
 			}
 		}
 
+		//全てリセット
 		if (Input::key[KEY_INPUT_SPACE] == DOWN)
 		{
 			if (ccCnt.IsTimeEnd())
@@ -179,6 +180,8 @@ namespace Mandelbrot
 				scale = 4.0;
 				posX = 2.0 + posRevision;
 				posY = 2.0;
+				nowPosX = 0.0;
+				nowPosY = 0.0;
 				Reset();
 			}
 			else
