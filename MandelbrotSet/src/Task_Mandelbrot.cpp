@@ -81,6 +81,8 @@ namespace Mandelbrot
 	void Task::Initialize()
 	{
 		posX += posRevision;
+		cursor.mposX = nowPosX;
+		cursor.mposY = nowPosY;
 		Reset();
 	}
 
@@ -130,6 +132,21 @@ namespace Mandelbrot
 			calculationNum = max(calculationNum + (plusCNum * 10), 10);
 		}
 
+		if (Input::key[KEY_INPUT_F] == DOWN)
+		{
+			if (cursor.on)
+			{
+				ChangeExpansionRate(1.0);
+				return;
+			}
+			else
+			{
+				ChangeExpansionRate(1.0);
+				return;
+			}
+		}
+
+
 		//ägëÂÅEèkè¨
 		if (cursor.on)
 		{
@@ -148,12 +165,7 @@ namespace Mandelbrot
 				ChangeExpansionRate(1.25);
 				return;
 			}
-			if (Input::key[KEY_INPUT_F] == DOWN)
-			{
-				ChangeExpansionRate(1.0);
-				return;
-			}
-
+			
 			if (Input::key[KEY_INPUT_Z] == DOWN)
 			{
 				ChangeExpansionRate(0.1);
